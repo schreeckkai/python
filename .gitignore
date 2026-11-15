@@ -1,0 +1,17 @@
+# Manim-Render-Ausgabe
+media/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editoren / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# PNG-Ausgaben der Banner-Scripts (bewusst versionieren: Dateinamen im Git-Index per "git add -f" erzwingen)
+*.png
