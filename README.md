@@ -31,6 +31,7 @@ manim -s --resolution 1920,480 szenen/kurs_banner.py KursBanner -o kurs_banner.p
 
 ```
 szenen/      Manim-Szenen (eine Szene pro Datei)
+  bedingte_wahrscheinlichkeit.py  Bedingte Wahrscheinlichkeit, Pfadregeln am Baumdiagramm
   ableiten_trig_funktionen.py     Ableitung gestreckter/verschobener Sinus-/Cosinus-Funktionen
   nullstellen_trig_funktionen.py  Nullstellen berechnen (2 Seiten)
   gleichungssystem.py             3x3-LGS per Gauß-Algorithmus (mit Rückwärtseinsetzen)
@@ -48,15 +49,17 @@ banner/      matplotlib-Scripts für Moodle-Bilder und Banner-PNGs
   ebenenbueschel_banner.py        3D-Ebenenbüschel + LGS (PNG)
   gleichungssysteme_banner.py     2x2-LGS + Schnittpunkt (PNG)
   schnittpunkt_video.py           Schnittpunkt-Video via matplotlib-Animation
+sprechtexte/ Sprechtexte mit Zeitmarken passend zu den Szenen (für Erklärvideos mit Sprecher)
 tools/       Hilfsskripte (LaTeX-Parser für die latex_to_video-Szenen)
 sonstiges/   Sonstiges (z. B. turtle-Grafik)
 media/       Render-Ausgabe von Manim (nicht committen, siehe .gitignore)
 ```
 
-## Workflow: Manim -> H5P Interactive Video
+## Workflow: Manim -> Erklärvideo -> H5P Interactive Video
 
-1. Szene in `szenen/` schreiben oder anpassen
+1. Szene in `szenen/` schreiben oder anpassen (passender Sprechtext in `sprechtexte/`)
 2. Rendern: `manim -qh szenen/meine_szene.py MeineSzene`
-3. MP4 aus `media/` in Moodle als **H5P Interactive Video** hochladen
-4. Quizfragen / Zwischenaufgaben an Zeitmarken setzen
+3. Sprechtext aufnehmen (z. B. Audacity) und mit FFmpeg anhängen:
+   `ffmpeg -i video.mp4 -i sprechtext.mp3 -c:v copy -map 0:v -map 1:a final.mp4`
+4. In Moodle als **H5P Interactive Video** hochladen, Quizfragen an die Zeitmarken aus dem Sprechtext setzen
 5. Nur Code committen; große Videos ggf. per Moodle oder als Release-Assets
